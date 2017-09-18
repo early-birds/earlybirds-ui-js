@@ -35,12 +35,13 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-standalone": "^6.25.0",
     "css-loader": "^0.28.7",
+    "earlybirds-js": "https://github.com/early-birds/earlybirds-js#dev/features_identify_and_trackactivity",
     "eslint": "^4.2.0",
     "jquery": "^3.2.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.18.2",
-    "earlybirds-js": "https://github.com/early-birds/earlybirds-js#dev/features_identify_and_trackactivity"
+    "webpack": "^3.6.0"
   }
 }
