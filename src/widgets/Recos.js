@@ -8,15 +8,25 @@ import { connect } from 'react-redux';
 import { getRecommendations } from '../actions';
 
 class RecosContainer extends Component {
-
-  componentWillMount() {
-
-    const { getRecommendations, widgetId } = this.props;
+  constructor(props) {
+    super(props)
+    const {
+      getRecommendations,
+      widgetId,
+      getRecosState,
+      recommendations,
+      widget,
+      children = <RecosItem />
+    } = this.props;
     getRecommendations(widgetId);
   }
-
-  render() {
-    const { getRecosState, recommendations, widget, children = <RecosItem /> } = this.props;
+  componentDidUpdate() {
+    const {
+      getRecosState,
+      recommendations,
+      widget,
+      children = <RecosItem />
+    } = this.props;
     if (getRecosState === 'success') {
       mountFromLocation(
         <RecosWidget recommendations={recommendations}>
@@ -25,6 +35,9 @@ class RecosContainer extends Component {
         widget.location
       )
     }
+  }
+
+  render() {
     return null;
   }
 }
