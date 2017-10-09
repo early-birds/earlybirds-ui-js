@@ -21,6 +21,7 @@
     "webpack-hot-middleware": "^2.19.1"
   },
   "dependencies": {
+    "babel-loader": "^7.1.2",
     "css-loader": "^0.28.7",
     "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",

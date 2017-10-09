@@ -77,6 +77,12 @@ export class Slider extends Component {
       })
     });
 
+    let query = json2mq({minWidth: breakpoints.slice(-1)[0]});
+    enquire.register(query, (a) => {
+      console.log('too high');
+    })
+     
+
     this.setState({
       max: elementToShow
     })
@@ -90,7 +96,6 @@ export class Slider extends Component {
       newoffset >= max - 1 ? max -1 :
       newoffset < 0 ? 0 : newoffset
     this.setState({ offset })
-    console.log(offset);
     this.calculateSliderItems();
   }
 

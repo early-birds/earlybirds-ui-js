@@ -26,7 +26,6 @@ export class Root extends Component {
       )
 
     const sliderSettings = {
-      elementToShow: 6,
       responsive: [
         {
           breakpoint: 1400,
@@ -64,7 +63,7 @@ export class Root extends Component {
     return (
       <div>
         <h1>Test4</h1>
-        <Slider max={4} settings={sliderSettings}>
+        <Slider settings={sliderSettings}>
           {mappedDatas}
         </Slider>
       </div>
