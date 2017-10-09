@@ -22,7 +22,7 @@ export class Root extends Component {
     const mappedDatas =
       datas.map(
         (x, i) =>
-          <Item title={x.title} />
+          <Item className='item' title={x.title} />
       )
 
     const sliderSettings = {
@@ -64,9 +64,13 @@ export class Root extends Component {
       <div>
         <h1>Test4</h1>
         <Slider settings={sliderSettings}>
+          <div className='slider-control'>
+              <button className='prev'>Precedent</button>
+              <button className='next'>Suivant</button>
+          </div>
           {mappedDatas}
         </Slider>
       </div>
     )
-  }
 }
+  }

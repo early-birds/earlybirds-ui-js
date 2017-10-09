@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import './style.css';
 import json2mq from 'json2mq';
 import enquire from 'enquire.js';
+import { get } from 'lodash';
 
 export class Slider extends Component {
 
@@ -17,7 +18,8 @@ export class Slider extends Component {
 
   calculateSliderItems() {
     const { max } = this.state;
-    const datas = this.props.children
+    const hasItemClass = x => x.attributes && x.attributes.className === 'item';
+    const datas = this.props.children.filter(hasItemClass)
 
     let dataSlider = [];
     for ( let i = 0; i < datas.length; i+=max) {
@@ -51,14 +53,11 @@ export class Slider extends Component {
   }
 
   componentWillMount() {
-
     const { responsive } = this.props.settings;
-
     const breakpoints =
       responsive
         .map(x => x.breakpoint)
         .sort((a, b) => a - b);
-
     const registerMediaQuery = (mq, bp) => {
       const settingItem = responsive.filter(x => x.breakpoint == bp)[0];
       enquire.register(mq, () => {
@@ -98,13 +97,31 @@ export class Slider extends Component {
     this.changeOffset(this.state.offset + 1);
   }
 
+  getBtnControlElement() {
+    const hasSliderControlClass =
+      x => x.attributes && x.attributes.className === 'slider-control';
+    const control = this.props.children.filter(hasSliderControlClass)[0]
+    if (control) {
+      control.children.map((x, i) => {
+        if (get(x, 'attributes.className') == 'prev')
+          x.attributes.onClick = this.prev;
+        else if (get(x, 'attributes.className') == 'next')
+          x.attributes.onClick = this.next;
+      })
+      return control;
+    }
+    return (
+      <div>
+        <span onClick={this.prev}>Prev</span>
+        <span onClick={this.next}>Next</span>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className='SliderContainer'>
-        <div>
-          <span onClick={this.prev}>Prev</span>
-          <span onClick={this.next}>Next</span>
-        </div>
+        {this.getBtnControlElement()}
         <div className='SliderContent'>
           {this.state.sliderItems}
         </div>
