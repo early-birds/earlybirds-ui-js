@@ -1,6 +1,7 @@
 import { h, render, Component } from 'preact';
+import { Root } from './src/Root';
 
 render(
-  <h1>ToTO</h1>,
+  <Root/>,
   document.getElementById('app')
 )
