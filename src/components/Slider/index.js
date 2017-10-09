@@ -23,7 +23,6 @@ export class Slider extends Component {
     for ( let i = 0; i < datas.length; i+=max) {
       dataSlider.push(datas.slice(i, i+max));
     }
-    console.log('page count', dataSlider.length);
 
     const generateSliderSubItems =
       (x, i) =>
@@ -53,41 +52,33 @@ export class Slider extends Component {
 
   componentWillMount() {
 
-    const { responsive, elementToShow } = this.props.settings;
+    const { responsive } = this.props.settings;
 
     const breakpoints =
       responsive
         .map(x => x.breakpoint)
         .sort((a, b) => a - b);
 
-    breakpoints.map((bp, i) => {
-      let bquery = i === 0 ? 
-        bquery = json2mq({minWidth: 0, maxWidth: bp}) :
-        bquery = json2mq({minWidth: breakpoints[i-1] + 100, maxWidth: bp});
-
-      console.log(bquery);
-      enquire.register(bquery, (a) => {
-        const el = responsive.filter(x => x.breakpoint == bp)[0];
-        console.log(el.breakpoint);
+    const registerMediaQuery = (mq, bp) => {
+      const settingItem = responsive.filter(x => x.breakpoint == bp)[0];
+      enquire.register(mq, () => {
         this.setState({
           breakpoint: bp,
-          max: el.settings.elementToShow
+          max: settingItem.settings.elementToShow
         });
         this.calculateSliderItems();
       })
+    }
+
+    breakpoints.map((bp, i) => {
+      let bquery = json2mq({
+        minWidth: i == 0 ? 0 : breakpoints[i-1],
+        maxWidth: bp
+      });
+      registerMediaQuery(bquery, bp);
     });
-
-    let query = json2mq({minWidth: breakpoints.slice(-1)[0]});
-    enquire.register(query, (a) => {
-      console.log('too high');
-    })
-     
-
-    this.setState({
-      max: elementToShow
-    })
-
-    this.calculateSliderItems();
+    const lastbp = breakpoints.slice(-1)[0];
+    registerMediaQuery(json2mq({minWidth: lastbp}), lastbp);
   }
 
   changeOffset(newoffset) {
