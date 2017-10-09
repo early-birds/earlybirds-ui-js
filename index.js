@@ -2,6 +2,6 @@ import { h, render, Component } from 'preact';
 import { Root } from './src/Root';
 
 render(
-  <Root/>,
+  <Root />,
   document.getElementById('app')
 )

@@ -1,5 +1,5 @@
 .SliderContainer {
-  width: 1000px;
+  width: 100%;
   height: 400px;
 }
 
@@ -16,6 +16,7 @@
   transition: margin-left linear 0.2s;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 }
 
 .subItem {
@@ -23,7 +24,7 @@
 }
 
 .item {
+  width: 200px;
   height: 90%;
-  width: 215px;
   border: 1px solid green;
 }

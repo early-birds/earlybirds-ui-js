@@ -1,4 +1,5 @@
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var webpack = require('webpack');
 
 module.exports = {
   entry: './index.js',
@@ -6,12 +7,13 @@ module.exports = {
     path: __dirname + '/dist',
     filename: 'bundle.js',
   },
-//  plugins: [new BundleAnalyzerPlugin()],
+  plugins: [
+  ],
   module: {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      use: 'babel-loader'
+      loaders: ['babel-loader']
     },
     {
       test: /\.css$/,

@@ -27,7 +27,7 @@ export class Root extends Component {
 
     return (
       <div>
-        <h1>Test</h1>
+        <h1>Test4</h1>
         <Slider max={4}>
           {mappedDatas}
         </Slider>

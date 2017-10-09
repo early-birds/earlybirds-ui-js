@@ -8,13 +8,6 @@ export class Slider extends Component {
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
 
-    /*
-    const hasSliderItemClass =
-      x => x.attributes.className === 'SliderItem';
-    const sliderItems =
-      props.children
-      .filter(hasSliderItemClass)
-    */
     const { max } = props;
     const datas = props.children
 
@@ -71,7 +64,7 @@ export class Slider extends Component {
     return (
       <div className='SliderContainer'>
         <div>
-          <span onClick={this.prev}>Prev</span>
+          <span onClick={this.prev}>Prevlol3</span>
           <span onClick={this.next}>Next</span>
         </div>
         <div className='SliderContent'>
