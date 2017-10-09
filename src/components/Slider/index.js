@@ -8,11 +8,39 @@ export class Slider extends Component {
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
 
+    /*
     const hasSliderItemClass =
       x => x.attributes.className === 'SliderItem';
     const sliderItems =
       props.children
       .filter(hasSliderItemClass)
+    */
+    const { max } = props;
+    const datas = props.children
+
+    let dataSlider = [];
+    for ( let i = 0; i < datas.length; i+=max) {
+      dataSlider.push(datas.slice(i, i+max));
+    }
+
+    const generateSliderSubItems =
+      (x, i) =>
+        <div className='subItem' key={i}>
+          {x}
+        </div>
+
+    const generateSliderItems =
+      (x, i) =>
+        <div className='SliderItem'>
+          {x.map(generateSliderSubItems)}
+        </div>
+
+    const sliderItems =
+      dataSlider
+      .map(generateSliderItems)
+
+    console.log('slider items', sliderItems);
+
     this.state = {
       offset: 0,
       sliderItems
@@ -20,12 +48,10 @@ export class Slider extends Component {
   }
 
   changeOffset(newoffset) {
-    console.log('changeo ffset');
     let max = this.state.sliderItems.length;
     let offset =
-      this.state.offset >= max - 1 ? max -1 :
-      this.state.offset < 0 ? 0 : newoffset
-    console.log(offset);
+      newoffset >= max - 1 ? max -1 :
+      newoffset < 0 ? 0 : newoffset
     this.setState({ offset })
   }
 

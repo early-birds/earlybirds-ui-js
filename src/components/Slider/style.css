@@ -1,0 +1,29 @@
+.SliderContainer {
+  width: 1000px;
+  height: 400px;
+}
+
+.SliderContent {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.SliderItem {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  background-color: orange;
+  transition: margin-left linear 0.2s;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.subItem {
+  align-items: center;
+}
+
+.item {
+  height: 90%;
+  width: 215px;
+  border: 1px solid green;
+}
