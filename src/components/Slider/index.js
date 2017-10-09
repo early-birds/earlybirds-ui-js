@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 import './style.css';
+import json2mq from 'json2mq';
+import enquire from 'enquire.js';
 
 export class Slider extends Component {
 
@@ -7,14 +9,21 @@ export class Slider extends Component {
     super()
     this.next = this.next.bind(this);
     this.prev = this.prev.bind(this);
+    this.state = {
+      sliderItems: [],
+      offset: 0
+    }
+  }
 
-    const { max } = props;
-    const datas = props.children
+  calculateSliderItems() {
+    const { max } = this.state;
+    const datas = this.props.children
 
     let dataSlider = [];
     for ( let i = 0; i < datas.length; i+=max) {
       dataSlider.push(datas.slice(i, i+max));
     }
+    console.log('page count', dataSlider.length);
 
     const generateSliderSubItems =
       (x, i) =>
@@ -32,12 +41,47 @@ export class Slider extends Component {
       dataSlider
       .map(generateSliderItems)
 
-    console.log('slider items', sliderItems);
-
-    this.state = {
-      offset: 0,
-      sliderItems
+    sliderItems[0].attributes.style = {
+      marginLeft: `calc(-${this.state.offset} * 100%)`
     }
+
+    this.setState({
+      sliderItems
+    })
+    return sliderItems;
+  }
+
+  componentWillMount() {
+
+    const { responsive, elementToShow } = this.props.settings;
+
+    const breakpoints =
+      responsive
+        .map(x => x.breakpoint)
+        .sort((a, b) => a - b);
+
+    breakpoints.map((bp, i) => {
+      let bquery = i === 0 ? 
+        bquery = json2mq({minWidth: 0, maxWidth: bp}) :
+        bquery = json2mq({minWidth: breakpoints[i-1] + 100, maxWidth: bp});
+
+      console.log(bquery);
+      enquire.register(bquery, (a) => {
+        const el = responsive.filter(x => x.breakpoint == bp)[0];
+        console.log(el.breakpoint);
+        this.setState({
+          breakpoint: bp,
+          max: el.settings.elementToShow
+        });
+        this.calculateSliderItems();
+      })
+    });
+
+    this.setState({
+      max: elementToShow
+    })
+
+    this.calculateSliderItems();
   }
 
   changeOffset(newoffset) {
@@ -46,6 +90,8 @@ export class Slider extends Component {
       newoffset >= max - 1 ? max -1 :
       newoffset < 0 ? 0 : newoffset
     this.setState({ offset })
+    console.log(offset);
+    this.calculateSliderItems();
   }
 
   prev() {
@@ -57,14 +103,10 @@ export class Slider extends Component {
   }
 
   render() {
-    const firstItem = this.state.sliderItems[0]
-    firstItem.attributes.style = {
-      marginLeft: `calc(-${this.state.offset} * 100%)`
-    }
     return (
       <div className='SliderContainer'>
         <div>
-          <span onClick={this.prev}>Prevlol3</span>
+          <span onClick={this.prev}>Prev</span>
           <span onClick={this.next}>Next</span>
         </div>
         <div className='SliderContent'>
