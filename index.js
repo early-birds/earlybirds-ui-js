@@ -1,7 +1,10 @@
 import { h, render, Component } from 'preact';
 import { Root } from './src/Root';
+import { Earlybirds } from './src/components/Earlybirds';
 
 render(
-  <Root />,
+  <Earlybirds>
+    <Root />
+  </Earlybirds>,
   document.getElementById('app')
 )

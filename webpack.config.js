@@ -1,5 +1,5 @@
 //var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-//var webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './index.js',
@@ -8,7 +8,6 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-//    new BundleAnalyzerPlugin()
   ],
   module: {
     loaders: [{
