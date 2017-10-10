@@ -72,5 +72,5 @@ export class Root extends Component {
         </Slider>
       </div>
     )
-}
   }
+}
