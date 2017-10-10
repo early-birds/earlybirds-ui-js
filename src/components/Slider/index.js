@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import './style.css';
 import json2mq from 'json2mq';
 import enquire from 'enquire.js';
-import { get } from 'lodash';
 
 export class Slider extends Component {
 
@@ -103,9 +102,9 @@ export class Slider extends Component {
     const control = this.props.children.filter(hasSliderControlClass)[0]
     if (control) {
       control.children.map((x, i) => {
-        if (get(x, 'attributes.className') == 'prev')
+        if (x.attributes && x.attributes.className == 'prev')
           x.attributes.onClick = this.prev;
-        else if (get(x, 'attributes.className') == 'next')
+        else if (x.attributes && x.attributes.className == 'next')
           x.attributes.onClick = this.next;
       })
       return control;
