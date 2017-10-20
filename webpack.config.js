@@ -1,4 +1,5 @@
 //var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//var nodeExternals = require('webpack-node-externals');
 var webpack = require('webpack');
 
 module.exports = {
@@ -8,6 +9,15 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
+  ],
+  devtool: 'source-map',
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      comments: false,
+      sourceMap: true,
+      minimize: false
+    }),
   ],
   module: {
     loaders: [{
@@ -20,7 +30,17 @@ module.exports = {
       exclude: /node_modules/,
       use: [
         'style-loader',
+        'css-loader?modules&importLoaders=1',
+        'postcss-loader'
+      ],
+    },
+    {
+      test: /\.scss$/,
+      exclude: /node_modules/,
+      use: [
+        'style-loader',
         'css-loader',
+        'sass-loader',
       ],
     }]
   },
