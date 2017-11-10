@@ -1,4 +1,5 @@
 import { h, render, Component } from 'preact';
+import { CloneElement } from '../lib/CloneElement';
 
 export const Render = props => {
   const { path, children, type = 'replace' } = props;

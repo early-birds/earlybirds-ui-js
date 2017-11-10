@@ -25,6 +25,7 @@ export class Slider extends Component {
       styles.SliderItem + ' ' + styles.column : styles.SliderItem;
 
     let dataSlider = [];
+    console.log(datas);
     for ( let i = 0; i < datas.length; i+=max) {
       dataSlider.push(datas.slice(i, i+max));
     }

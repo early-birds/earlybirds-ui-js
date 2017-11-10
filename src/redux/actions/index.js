@@ -7,14 +7,17 @@ export const identifySuccessAction = () => ({
 export const getRecommendationsStartAction = namespace => ({
   type: `${namespace}/GET_RECOS_START`
 })
+
 export const getRecommendationsSuccess = (namespace, payload) => ({
   type: `${namespace}/GET_RECOS_SUCCESS`,
   payload: payload
 })
+
 export const getRecommendationsError = (namespace, err) => ({
   type: `${namespace}/GET_RECOS_ERROR`,
   err: err
 })
+
 export const getRecommendations = (namespace, widgetId) =>
   dispatch => {
     console.log('dispatch ' + namespace + ' /'  + widgetId);

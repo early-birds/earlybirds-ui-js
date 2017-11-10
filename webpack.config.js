@@ -11,6 +11,7 @@ module.exports = {
   plugins: [
   ],
   devtool: 'source-map',
+  /*
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
@@ -19,6 +20,7 @@ module.exports = {
       minimize: false
     }),
   ],
+  */
   module: {
     loaders: [{
       test: /\.js$/,
