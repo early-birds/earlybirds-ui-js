@@ -1,5 +1,5 @@
 import { h, render, Component } from 'preact';
-import { Eb } from 'earlybirds-js';
+import Eb from 'earlybirds-js';
 import { Render } from '../Render';
 import { CloneElement } from '../../lib/CloneElement';
 import { ExpectChild } from '../../hoc/ExpectChild';
