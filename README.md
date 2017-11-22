@@ -12,17 +12,17 @@ Let's say we have this recommendations block in our website and we want to displ
 </div>
 ```
 
-### Explanation : the workflow 
+### Explanation : the workflow
 First, we need to create a datasourceId in our platform that corresponds to a customer referential ( internet account, CRM, … )
 
-We can now make an identify request by providing a profile object that contains : 
+We can now make an identify request by providing a profile object that contains :
 ```js
 // case 1 : Create a new user
 profile: {}
 
 // case 2 : Identify the user by its profile id
 profile: {
-  id: {{profileId}}, 
+  id: {{profileId}},
 }
 
 // case 3 : Matching between visitor id and earlybirds profile id
@@ -44,7 +44,9 @@ We then trigger the recommendation request by providing the widgetId and the pro
 ```html
 <Identify profile={PROFILE_CONFIG}>
   <Recos widgetId='WIDGET_ID'>
-    <RecosContainer />
+    {datas => {
+      <RecosContainer datas={datas} />
+    })
   </Recos>
 </Identify>
 ```
@@ -56,7 +58,7 @@ The first one is ```<Identify />``` that is used to identify a visitor.
 The second one is ```<Recos />``` that retrieves the recommendation and render it in the good location.
 
 The third component ```<RecosContainer />``` will get a 'datas' props injected
-and can be used to display the result: 
+and can be used to display the result:
 ```js
 const RecosContainer = ({datas}) =>
   <div>
@@ -77,7 +79,7 @@ Accept a widgetId as parameter to retrieve the recommendations list.
 Also expect a component attribute or a child component where the 'datas' will be rendered to as props.
 
 ### ```<Slider settings={Object} elementToShow={Number}>```
-Accept a list of children and generate a slider.
+Accept a datas and display a slider
 
 elementToShow : number of element per slide
 
@@ -85,13 +87,13 @@ settings : accept a configuration to handle responsiveness
 ```js
 const settings = {
   responsive: [{
-    breakpoint: 1024, // screen size
+    bp: 1024, // screen size
     elementToShow: 5
   },{
-    breakpoint: 768,
+    bp: 768,
     elementToShow: 3
   },{
-    breakpoint: 480,
+    bp: 480,
     elementToShow: 1
   }]
 }
@@ -99,17 +101,18 @@ const settings = {
 
 #### Example
 ```html
-<Slider settings={settings}>
-  <div className='item'> Product </div>
-  <div className='item'> Product </div>
-  <div className='item'> Product </div>
-  <div className='item'> Product </div>
-  <!-- ... -->
+<Slider datas={datas} settings={settings}>
+  {list => (
+    <div>
+      {list}
+    </div>
+  )}
 </Slider>
 ```
-Elements should have an 'item' class for this to work
+datas object should be wrapped inside a component before passing it to
+Slider.
 
-Will display : 
+It will display :
   - 5 elements when the screen size is 768 or above
   - 3 elements when the screen size is between 480 and 768
   - 1 element when the screen size is under 480
