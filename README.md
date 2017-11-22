@@ -46,6 +46,11 @@ We then trigger the recommendation request by providing the widgetId and the pro
   <Recos widgetId='WIDGET_ID'>
     {datas => {
       <RecosContainer datas={datas} />
+      {mappedDatas =>  {
+        <div>
+          {mappedDatas}
+        </div>
+      })
     })
   </Recos>
 </Identify>
@@ -55,15 +60,20 @@ We introduced 2 components from the earlybirds UI.
 
 The first one is ```<Identify />``` that is used to identify a visitor.
 
-The second one is ```<Recos />``` that retrieves the recommendation and render it in the good location.
+The second one is ```<Recos />``` that retrieves the recommendation and
+expect a renderfn that will be called with the datas
 
-The third component ```<RecosContainer />``` will get a 'datas' props injected
-and can be used to display the result:
+The third component ```<RecosContainer />``` do some intermediary processing and print the result.
+Here is RecosContainer implementation :
+
 ```js
-const RecosContainer = ({datas}) =>
+const RecosContainer = ({datas, children}) => {
+
+  const mappedDatas = datas.map(x => <div>{x.product.title}</div>)
   <div>
-    { datas.map(x => <div>{x.product.title}</div>) }
+    {children[0](mappedDatas)}
   </div>
+}
 
 /* output a list of product */
 ```
@@ -79,7 +89,7 @@ Accept a widgetId as parameter to retrieve the recommendations list.
 Also expect a component attribute or a child component where the 'datas' will be rendered to as props.
 
 ### ```<Slider settings={Object} elementToShow={Number}>```
-Accept a datas and display a slider
+Accept 'datas' as parameter and call a renderFn with the wrappedDatas.
 
 elementToShow : number of element per slide
 
