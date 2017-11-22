@@ -12,6 +12,7 @@ class RecosComponent extends Component {
       path: null
     }
   }
+
   componentDidMount() {
     const { widgetId } = this.props;
     if (!this.state.response) {
@@ -25,38 +26,15 @@ class RecosComponent extends Component {
         });
     }
   }
+
   render() {
-
-
     if (this.state.recommendations) {
       return (
         <Render path={this.state.path}>
           { this.props.children[0](this.state.recommendations) }
         </Render>
       )
-      //return this.props.children[0](this.state.recommendations)
-      /*
-      return (
-        <Render path={this.state.path}>
-          <ElementToRender />
-        </Render>
-      )
-      */
     }
-    /*
-    const ElementToRender = CloneElement(this.props.children[0], {
-      datas: this.state.recommendations
-    });
-    const ElementToRender = this.props.children[0]
-    console.log(this.state.recommendations)
-    if (this.state.recommendations) {
-      return (
-        <Render path={this.state.path}>
-          <ElementToRender datas={this.state.recommendations} />
-        </Render>
-      )
-    }
-    */
   }
 }
 export default ExpectChild(RecosComponent);

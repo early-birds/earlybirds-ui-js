@@ -8,7 +8,6 @@ class WithWindowResizing extends Component {
       generateSortedMediaQueriesFromList(this.props.responsive)
       .map(x => {
         enquire.register(x.computed, () => {
-          console.log(x.computed, x.elementToShow)
           this.setState({
             elementToShow: x.elementToShow
           })
@@ -17,7 +16,6 @@ class WithWindowResizing extends Component {
       })
 
     enquire.register(json2mq({ minWidth: mqList[mqList.length-1].bp }), () => {
-      console.log('high')
       this.setState({
         elementToShow: mqList[mqList.length-1].elementToShow
       })
