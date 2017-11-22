@@ -1,6 +1,6 @@
 import { h, render, Component } from 'preact';
 import Eb from 'earlybirds-js';
-import { Render } from '../Render';
+import Render from '../Render';
 import { CloneElement } from '../../lib/CloneElement';
 import { ExpectChild } from '../../hoc/ExpectChild';
 
@@ -27,15 +27,21 @@ class RecosComponent extends Component {
   }
   render() {
 
-    const ElementToRender = CloneElement(this.props.children[0], {
-      datas: this.state.recommendations
-    });
+
     if (this.state.recommendations) {
+      return (
+        <Render path={this.state.path}>
+          { this.props.children[0](this.state.recommendations) }
+        </Render>
+      )
+      //return this.props.children[0](this.state.recommendations)
+      /*
       return (
         <Render path={this.state.path}>
           <ElementToRender />
         </Render>
       )
+      */
     }
     /*
     const ElementToRender = CloneElement(this.props.children[0], {
@@ -53,4 +59,4 @@ class RecosComponent extends Component {
     */
   }
 }
-export const Recos = ExpectChild(RecosComponent);
+export default ExpectChild(RecosComponent);
