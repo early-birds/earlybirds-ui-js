@@ -5,7 +5,7 @@ export const generateSortedMediaQueriesFromList = list => {
   return list
     .sort((a, b) => a.bp - b.bp)
     .map(x => {
-      const mq = json2mq({ minWidth: lastBp, maxWidth: x.bp})
+      const mq = json2mq({ minWidth: Number(lastBp), maxWidth: Number(x.bp)})
       lastBp = x.bp
       return {
         ...x,

@@ -14,6 +14,7 @@ class RecosComponent extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.widgetId) return null
     const { widgetId } = this.props;
     if (!this.state.response) {
       new Eb().getInstance()
@@ -37,4 +38,5 @@ class RecosComponent extends Component {
     }
   }
 }
+
 export default ExpectChild(RecosComponent);

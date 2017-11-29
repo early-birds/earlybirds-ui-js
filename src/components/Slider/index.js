@@ -9,43 +9,36 @@ import { cycleThrough } from '../../lib/Pagination'
 import { toArrayOfXElement } from '../../lib/Utils'
 import { generateSortedMediaQueriesFromList } from '../../lib/Json2MqParsing'
 
-const GenerateSliderList = ({elementToShow, datas, children }) => {
+const GenerateSliderList = ({itemPerPage, datas, children }) => {
   const list =
     toArrayOfXElement(
       datas.map(x =>
-        <div className='slider-item' style={{width: (100 / elementToShow) + '%'}}>{x}</div>
-      ), elementToShow)
+        <div className='slider-item' style={{width: (100 / itemPerPage) + '%'}}>{x}</div>
+      ), itemPerPage)
     .map(x => <div className='slider-page'>{x}</div>)
 
   return children[0](list)
 }
 
-const Slider = ({ settings = {}, datas, children }) => {
-  const { responsive = [], elementToShow = 5 } = settings
-
+const Slider = (datas, itemPerPage, children) => {
   return (
-    <WithWindowResizing elementToShow={elementToShow} responsive={responsive}>
-    {itemPerPage => (
+    <GenerateSliderList itemPerPage={itemPerPage} datas={datas}>
+    {list => (
 
-      <GenerateSliderList elementToShow={itemPerPage} datas={datas}>
-      {list => (
+      <WithPaginate max={list.length-1} min={0}>
+      {(offset, next, prev) => (
 
-        <WithPaginate max={list.length-1} min={0}>
-        {(offset, next, prev) => (
-
-          <WithSliding list={list} offset={offset}>
-          {() => (
-            <div className='slider-container'>
-              {children[0](list, next, prev, offset)}
-            </div>
-          )}
-          </WithSliding>
+        <WithSliding list={list} offset={offset}>
+        {() => (
+          <div className='slider-container'>
+            {children[0](list, next, prev, offset)}
+          </div>
         )}
-        </WithPaginate>
+        </WithSliding>
       )}
-      </GenerateSliderList>
+      </WithPaginate>
     )}
-    </WithWindowResizing>
+    </GenerateSliderList>
   )
 }
 
