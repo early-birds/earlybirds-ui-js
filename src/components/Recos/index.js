@@ -7,9 +7,21 @@ import { ExpectChild } from '../../hoc/ExpectChild';
 class RecosComponent extends Component {
   constructor(props) {
     super(props);
+    console.log('Recos component')
     this.state = {
       recommendations: null,
       path: null
+    }
+  }
+
+  getPath(path) {
+    const location = this.props.automount
+    if (location !== undefined &&
+      location !== 'auto') {
+      return location
+    }
+    else {
+      return path
     }
   }
 
@@ -22,7 +34,7 @@ class RecosComponent extends Component {
         .then(response => {
           this.setState({
             recommendations: response.recommendations,
-            path: response.widget.location.path
+            path: this.getPath(response.widget.location.path)
           })
         });
     }
@@ -30,11 +42,17 @@ class RecosComponent extends Component {
 
   render() {
     if (this.state.recommendations) {
-      return (
-        <Render path={this.state.path}>
-          { this.props.children[0](this.state.recommendations) }
-        </Render>
-      )
+      const toBeRendered = this.props.children[0](this.state.recommendations)
+      if (this.state.path) {
+        return (
+          <Render path={this.state.path}>
+          {toBeRendered}
+          </Render>
+        )
+      }
+      else {
+        return toBeRendered
+      }
     }
   }
 }

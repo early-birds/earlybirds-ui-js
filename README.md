@@ -84,9 +84,18 @@ const RecosContainer = ({datas, children}) => {
 Accept a profile object as parameter and perform an identify request when needed.
 Render its child when identify request is completed.
 
-### ```<Recos widgetId='String'>```
+### ```<Recos widgetId='String' [automount={true}]>```
 Accept a widgetId as parameter to retrieve the recommendations list.
 Also expect a component attribute or a child component where the 'datas' will be rendered to as props.
+
+widgetId (mandatory) : the widget id
+
+automount (optional) : Earlybirds getRecommendations call returns a
+location path where the widget will be mounted to. The default value is
+`true`.
+Can be set to `false` if you want to disable the feature.
+You can also pass a selector (ex: 'body .another-location') if you want to mount the
+widget elsewhere.
 
 ### ```<Slider settings={Object} elementToShow={Number}>```
 Accept 'datas' as parameter and call a renderFn with the wrappedDatas.
