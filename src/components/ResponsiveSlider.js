@@ -51,13 +51,17 @@ const DynamicItemPerPage = ({ breakpoints, children }) => {
 }
 
 const ResponsiveSlider = ({ datas, breakpoints, children }) => {
+  if (!breakpoints) {
+    console.warn('Earlybirds reponsive slider : breakpoints object is missing')
+    return null
+  }
   return (
     <DynamicItemPerPage breakpoints={breakpoints}>
       {itemPerPage => (
 
         <div>
           <h1>Call slider</h1>
-          <Slider datas={datas.map(x => <div>{x.title}</div>)} itemPerPage={itemPerPage}>
+          <Slider datas={datas} itemPerPage={itemPerPage}>
             {(list, next, prev, offset) => (
               <div>
                 <h1>In Slider</h1>

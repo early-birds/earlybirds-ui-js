@@ -20,7 +20,7 @@ const GenerateSliderList = ({itemPerPage, datas, children }) => {
   return children[0](list)
 }
 
-const Slider = (datas, itemPerPage, children) => {
+const Slider = ({datas, itemPerPage=datas.length, children}) => {
   return (
     <GenerateSliderList itemPerPage={itemPerPage} datas={datas}>
     {list => (
