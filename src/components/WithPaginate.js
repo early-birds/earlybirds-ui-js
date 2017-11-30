@@ -1,4 +1,5 @@
 import { h, render, Component } from 'preact'
+import { cycleThrough } from '../lib/Pagination'
 
 class WithPaginate extends Component {
   state = { offset: 0 }

@@ -16,9 +16,8 @@ body {
 
 .slider-item {
   display: inline-block;
-  background-color: #dedede;
-  border: 1px solid #fd0b0b;
   box-sizing: border-box;
+  vertical-align: middle;
 }
 
 .slider-item>div {
