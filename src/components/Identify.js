@@ -27,7 +27,6 @@ class Identify extends Component {
 
   render() {
     if (this.state.isIdentified) {
-      console.log('is identified')
       return this.props.children[0]
     }
   }
