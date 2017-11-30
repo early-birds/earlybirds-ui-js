@@ -15,6 +15,7 @@
     "json2mq": "^0.2.0",
     "postcss-loader": "^2.0.8",
     "preact": "^8.2.5",
+    "preact-slider": "^1.0.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.19.0",
