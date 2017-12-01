@@ -1,13 +1,13 @@
 import { h, render, Component } from 'preact';
 import Eb from 'earlybirds-js';
 import Render from '../Render';
+import WaitDomElement from '../WaitDomElement';
 import { CloneElement } from '../../lib/CloneElement';
 import { ExpectChild } from '../../hoc/ExpectChild';
 
 class RecosComponent extends Component {
   constructor(props) {
     super(props);
-    console.log('Recos component')
     this.state = {
       recommendations: null,
       path: null
@@ -45,9 +45,11 @@ class RecosComponent extends Component {
       const toBeRendered = this.props.children[0](this.state.recommendations)
       if (this.state.path) {
         return (
-          <Render path={this.state.path}>
-          {toBeRendered}
-          </Render>
+          <WaitDomElement path={this.state.path}>
+            <Render path={this.state.path}>
+            {toBeRendered}
+            </Render>
+          </WaitDomElement>
         )
       }
       else {
