@@ -10,7 +10,8 @@ class RecosComponent extends Component {
     super(props);
     this.state = {
       recommendations: null,
-      path: null
+      path: null,
+      type: null
     }
   }
 
@@ -37,7 +38,8 @@ class RecosComponent extends Component {
         .then(response => {
           this.setState({
             recommendations: response.recommendations,
-            path: this.getPath(response.widget.location.path)
+            path: this.getPath(response.widget.location.path),
+            type: response.widget.location.type
           })
         });
     }
@@ -49,7 +51,7 @@ class RecosComponent extends Component {
       if (this.state.path) {
         return (
           <WaitDomElement path={this.state.path}>
-            <Render path={this.state.path}>
+            <Render path={this.state.path} type={this.state.type}>
             {toBeRendered}
             </Render>
           </WaitDomElement>
