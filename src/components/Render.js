@@ -1,41 +1,28 @@
-import { h, render } from 'preact';
+import { h, render, Component } from 'preact';
 
-const actions = {
-  'prepend': el => {
-    el.insertBefore(document.createElement('div'), el.firstElementChild);
-    return el.firstElementChild;
-  },
-  'append': el => {
-    el.appendChild(document.createElement('div'))
-    return el.lastElementChild;
-  },
-  'html': el => {
-    el.innerHTML = '';
-    return el;
-  },
-  'after': el => {
-    const newEl = el.parentNode.insertBefore(document.createElement('div'), el.nextSibling)
-    return newEl;
-  },
-  'before': el => {
-    const newEl = el.parentNode.insertBefore(document.createElement('div'), el)
-    return newEl;
-  },
-}
+class Render extends Component {
 
-const Render = (props) => {
-  const { path, children, type = 'html' } = props;
-  if (path == null) return null;
-  const el = document.querySelector(path);
-  let replaceAt;
-  if (el) {
-    const replaceAt = actions[type](el)
-    render(
-      <span>{children}</span>,
-      replaceAt,
-    );
+  componentWillMount() {
+    const { path, children, type = 'html' } = this.props;
+    if (path == null) return null;
+
+    const el = document.querySelector(path);
+    if (el) {
+      const toBeRendered = <span>{children}</span>
+
+      switch(type) {
+        case 'html':
+          render(toBeRendered, null, el);
+          break;
+        case 'append':
+          render(toBeRendered, el);
+          break;
+        case 'prepend':
+          render(toBeRendered, el, el.firstChild);
+          break;
+      }
+    }
   }
-  return null;
 };
 
 export default Render;
