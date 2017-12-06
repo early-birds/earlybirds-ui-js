@@ -9,7 +9,7 @@ class RecosComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recommendations: null,
+      response: null,
       path: null,
       type: null
     }
@@ -32,22 +32,20 @@ class RecosComponent extends Component {
       return null
     }
     const { widgetId } = this.props;
-    if (!this.state.response) {
-      new Eb().getInstance()
-        .getRecommendations(widgetId)
-        .then(response => {
-          this.setState({
-            recommendations: response.recommendations,
-            path: this.getPath(response.widget.location.path),
-            type: response.widget.location.type
-          })
-        });
-    }
+    new Eb().getInstance()
+      .getRecommendations(widgetId)
+      .then(response => {
+        this.setState({
+          response: response,
+          path: this.getPath(response.widget.location.path),
+          type: response.widget.location.type
+        })
+      });
   }
 
   render() {
-    if (this.state.recommendations) {
-      const toBeRendered = this.props.children[0](this.state.recommendations)
+    if (this.state.response) {
+      const toBeRendered = this.props.children[0](this.state.response)
       if (this.state.path) {
         return (
           <WaitDomElement path={this.state.path}>
