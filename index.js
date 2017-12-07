@@ -8,6 +8,17 @@ import { CloneElement } from './src/lib/CloneElement';
 
 const { Slider, ResponsiveSlider } = Sliders
 
+export {
+  Slider,
+  ResponsiveSlider,
+  Render,
+  Recos,
+  ExpectChild,
+  CloneElement,
+  Identify,
+  WaitDomElement
+};
+
 export default {
   Slider,
   ResponsiveSlider,
