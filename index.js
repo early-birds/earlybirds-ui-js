@@ -8,7 +8,7 @@ import { CloneElement } from './src/lib/CloneElement';
 
 const { Slider, ResponsiveSlider } = Sliders
 
-export {
+export default {
   Slider,
   ResponsiveSlider,
   Render,
