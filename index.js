@@ -8,7 +8,7 @@ import { CloneElement } from './src/lib/CloneElement';
 
 const { Slider, ResponsiveSlider } = Sliders
 
-const config = {
+export {
   Slider,
   ResponsiveSlider,
   Render,
@@ -18,5 +18,3 @@ const config = {
   Identify,
   WaitDomElement
 };
-
-export default config;
