@@ -1,4 +1,4 @@
-import Sliders from 'preact-slider'
+import Sliders from 'preact-slider';
 import Render from './src/components/Render';
 import Recos from './src/components/Recos';
 import Identify from './src/components/Identify';

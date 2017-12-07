@@ -28,18 +28,18 @@ class RecosComponent extends Component {
 
   componentDidMount() {
     if (!this.props.widgetId) {
-      console.error('Recos component: widgetId is missing')
-      return null
+      console.error('Recos component: widgetId is missing');
+      return null;
     }
     const { widgetId } = this.props;
     new Eb().getInstance()
-      .getRecommendations(widgetId)
-      .then(response => {
+      .getRecommendations(widgetId, { variables: this.props.variables })
+      .then((response) => {
         this.setState({
-          response: response,
+          response,
           path: this.getPath(response.widget.location.path),
-          type: response.widget.location.type
-        })
+          type: response.widget.location.type,
+        });
       });
   }
 
@@ -50,14 +50,12 @@ class RecosComponent extends Component {
         return (
           <WaitDomElement path={this.state.path}>
             <Render path={this.state.path} type={this.state.type}>
-            {toBeRendered}
+              {toBeRendered}
             </Render>
           </WaitDomElement>
-        )
+        );
       }
-      else {
-        return toBeRendered
-      }
+      return toBeRendered;
     }
   }
 }

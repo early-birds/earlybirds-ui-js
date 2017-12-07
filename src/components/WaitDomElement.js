@@ -23,4 +23,4 @@ class WaitDomElement extends Component {
   }
 }
 
-export default WaitDomElement
+export default WaitDomElement;
