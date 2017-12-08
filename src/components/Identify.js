@@ -5,7 +5,6 @@ class Identify extends Component {
   state = { isIdentified: false }
 
   componentWillMount() {
-    if (!this.props.profile) return false
     const eb = new Eb().getInstance()
     if (!eb.trackerKey && !this.props.trackerKey)
       return false
