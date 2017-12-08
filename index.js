@@ -18,3 +18,14 @@ export {
   Identify,
   WaitDomElement
 };
+
+export default {
+  Slider,
+  ResponsiveSlider,
+  Render,
+  Recos,
+  ExpectChild,
+  CloneElement,
+  Identify,
+  WaitDomElement
+};
