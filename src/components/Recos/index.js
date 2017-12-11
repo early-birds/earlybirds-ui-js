@@ -35,18 +35,26 @@ class RecosComponent extends Component {
     new Eb().getInstance()
       .getRecommendations(widgetId, { variables: this.props.variables })
       .then((response) => {
-        this.setState({
-          response,
-          path: this.getPath(response.widget.location.path),
-          type: response.widget.location.type,
-        });
-      });
+        if (response.error) {
+          console.error(response.message)
+        }
+        else {
+          this.setState({
+            response,
+            path: this.getPath(response.widget.location.path),
+            type: response.widget.location.type,
+          });
+        }
+      })
+      .catch(err => {
+        console.error('Earlybirds Recos : ', err)
+      })
   }
 
   render() {
     if (this.state.response) {
       const toBeRendered = this.props.children[0](this.state.response)
-      if (this.state.path) {
+      if (this.state.path && this.state.response.recommendations.length > 0) {
         return (
           <WaitDomElement path={this.state.path}>
             <Render path={this.state.path} type={this.state.type}>
@@ -55,7 +63,6 @@ class RecosComponent extends Component {
           </WaitDomElement>
         );
       }
-      return toBeRendered;
     }
   }
 }
