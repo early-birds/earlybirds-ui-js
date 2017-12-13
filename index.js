@@ -3,6 +3,7 @@ import Render from './src/components/Render';
 import Recos from './src/components/Recos';
 import Identify from './src/components/Identify';
 import WaitDomElement from './src/components/WaitDomElement';
+import RenderIf from './src/components/RenderIf';
 import { ExpectChild } from './src/hoc/ExpectChild';
 import { CloneElement } from './src/lib/CloneElement';
 
@@ -16,7 +17,8 @@ export {
   ExpectChild,
   CloneElement,
   Identify,
-  WaitDomElement
+  WaitDomElement,
+  RenderIf
 };
 
 export default {
@@ -27,5 +29,6 @@ export default {
   ExpectChild,
   CloneElement,
   Identify,
-  WaitDomElement
+  WaitDomElement,
+  RenderIf
 };
