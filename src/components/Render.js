@@ -48,7 +48,8 @@ class Render extends Component {
 
       switch (type) {
         case 'html':
-          render(toBeRendered, null, el);
+          el.innerHTML = ''
+          render(toBeRendered, el);
           break;
         case 'append':
         case 'prepend':

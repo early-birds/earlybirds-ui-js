@@ -4,6 +4,7 @@ import Recos from './src/components/Recos';
 import Identify from './src/components/Identify';
 import WaitDomElement from './src/components/WaitDomElement';
 import RenderIf from './src/components/RenderIf';
+import Click from './src/components/Click';
 import { ExpectChild } from './src/hoc/ExpectChild';
 import { CloneElement } from './src/lib/CloneElement';
 
@@ -18,7 +19,8 @@ export {
   CloneElement,
   Identify,
   WaitDomElement,
-  RenderIf
+  RenderIf,
+  Click
 };
 
 export default {
@@ -30,5 +32,6 @@ export default {
   CloneElement,
   Identify,
   WaitDomElement,
-  RenderIf
+  RenderIf,
+  Click
 };

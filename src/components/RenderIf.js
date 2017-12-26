@@ -6,14 +6,16 @@ class RenderIf extends Component {
   componentWillMount() {
     const { condition } = this.props
     if (!condition) return null
-    const intervalId = setInterval(() => {
-      if (condition()) {
-        clearInterval(intervalId)
+    const tr = () => {
+      if (!condition()) {
+        window.requestAnimationFrame(tr);
+      } else {
         this.setState({
-          shouldRender: true
+          shouldRender: true,
         })
       }
-    }, 200)
+    };
+    tr()
   }
 
   render() {
