@@ -1,7 +1,7 @@
 import { h, render, Component } from 'preact';
 
 const insertElem = (element, parent, type) => {
-  const newDiv = document.createElement(element.nodeName);
+  const newDiv = document.createElement((element.attributes || {}).rootElement || element.nodeName);
   let newEl;
 
   if (type === 'append') {
@@ -39,6 +39,7 @@ class Render extends Component {
 
   componentWillMount() {
     const { path, children, type = 'html' } = this.props;
+    console.log(this.props);
     if (path == null) return null;
     const el = document.querySelector(path);
     let newDiv;
