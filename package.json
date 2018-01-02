@@ -1,6 +1,6 @@
 {
   "name": "earlybirds-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Earlybirds for preact is a wrapper around the earlybirds-js project and provides a set of components and helpers that'll facilitate the implementation of earlybirds.",
   "main": "index.js",
   "dependencies": {
